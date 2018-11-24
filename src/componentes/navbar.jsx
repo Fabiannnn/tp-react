@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class NavBar extends Component {
   state = {};
@@ -8,6 +9,14 @@ export default class NavBar extends Component {
         <a href="#" className="navbar-brand">
           Navbar
         </a>
+        <ul>
+          <li>
+            <Link to="/contador">Contador</Link>
+          </li>
+          <li>
+            <Link to="/eventos-interesantes">Eventos Interesantes</Link>
+          </li>
+        </ul>
       </nav>
     );
   }

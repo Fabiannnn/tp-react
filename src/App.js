@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 
 import "./App.css";
 import NavBar from "./componentes/navbar";
@@ -11,7 +12,8 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <main className="container">
-          <EventosInteresantes />
+          <Route path="/eventos-interesantes" component={EventosInteresantes} />
+          <Route path="/contador" component={Contador} />
         </main>
       </React.Fragment>
     );
