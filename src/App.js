@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.css";
 import NavBar from "./componentes/navbar";
 import Contador from "./componentes/contador";
+import DetalleEvento from "./componentes/detalleEvento";
 import EventosInteresantes from "./componentes/eventosInteresantes";
 
 class App extends Component {
@@ -12,8 +13,15 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <main className="container">
-          <Route path="/eventos-interesantes" component={EventosInteresantes} />
-          <Route path="/contador" component={Contador} />
+          <Switch>
+            <Route path="/eventos/:id" component={DetalleEvento} />
+            <Route path="/eventos" component={EventosInteresantes} />
+            <Route path="/contador" component={Contador} />
+            <Route
+              path="/eventos-interesantes"
+              component={EventosInteresantes}
+            />
+          </Switch>
         </main>
       </React.Fragment>
     );

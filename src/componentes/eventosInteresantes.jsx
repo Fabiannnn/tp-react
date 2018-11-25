@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import { obtenerEventos } from "../servicios/falsoServicioEventos";
+import { Link } from "react-router-dom";
+//import http from "./servicios/servicioHttp";
+import axios from "axios";
+
+const apiEndpoint = "http://localhost:3001/eventos-interesantes";
 
 export default class EventosInteresantes extends Component {
-  estado = {
-    eventos: obtenerEventos()
+  state = {
+    eventos: []
   };
+
+  async componentDidMount() {
+    const { data: eventos } = await axios.get(apiEndpoint);
+    this.setState({ eventos });
+  }
 
   acceder = evento => {
     console.log(evento);
@@ -14,11 +24,13 @@ export default class EventosInteresantes extends Component {
     return (
       <table className="table">
         <tbody>
-          {this.estado.eventos.map(evento => (
-            <tr key={evento.id} onClick={() => this.acceder(evento)}>
-              <td>{evento.nombre}</td>
-              <td>{evento.ubicacion}</td>
-              <td>{evento.fecha}</td>
+          {this.state.eventos.map(evento => (
+            <tr key={evento.id}>
+              <td>
+                <Link to={`/eventos/${evento.id}`}>
+                  {evento.nombre} {evento.ubicacion} {evento.fechaInicio}
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -29,7 +41,7 @@ export default class EventosInteresantes extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.estado.eventos.length === 0 && "No hay eventos"}
+        {this.state.eventos.length === 0 && "No hay eventos"}
         {this.mostrarTablaEventos()}
       </React.Fragment>
     );
