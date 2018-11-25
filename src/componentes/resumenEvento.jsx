@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import EventosInteresantes from "./eventosInteresantes";
 
 export default class ResumenEvento extends Component {
   evento = {
-    nombre: "unNombre",
-    ubicacion: "unaUbicacion",
-    fechaInicio: "unaFechaDeInicio",
-    fechaFin: "unaFechaDeFin",
-    precio: 100
+    id: this.props.id,
+    nombre: this.props.nombre,
+    ubicacion: this.props.ubicacion,
+    fechaInicio: this.props.fechaInicio,
+    fechaFin: this.props,
+    precio: this.props.precio
   };
 
   render() {
+    console.log("props", this.props);
     return (
       <div>
         {this.evento.nombre}

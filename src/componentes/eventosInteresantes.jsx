@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import http from "../servicios/servicioHttp";
+import ResumenEvento from "../componentes/resumenEvento";
 
 const urlPedidoEventos = "http://localhost:3001/eventos-interesantes";
 
@@ -38,10 +39,16 @@ export default class EventosInteresantes extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.state.eventos.length === 0 && "No hay eventos"}
-        {this.mostrarTablaEventos()}
-      </React.Fragment>
+      <div>
+        {this.state.eventos.map(evento => (
+          <ResumenEvento key={evento.id} {...evento} />
+        ))}
+      </div>
     );
   }
 }
+
+//<React.Fragment>
+//this.state.eventos.length === 0 && "No hay eventos"}
+//{this.mostrarTablaEventos()}
+//</React.Fragment>
