@@ -14,7 +14,7 @@ class App extends Component {
         <NavBar />
         <main className="container">
           <Switch>
-            <Route path="/eventos/:id" component={DetalleEvento} />
+            <Route path="/evento/:id" component={DetalleEvento} />
             <Route path="/eventos" component={EventosInteresantes} />
             <Route path="/contador" component={Contador} />
             <Route
