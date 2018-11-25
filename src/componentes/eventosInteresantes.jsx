@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { obtenerEventos } from "../servicios/falsoServicioEventos";
 import { Link } from "react-router-dom";
-//import http from "./servicios/servicioHttp";
-import axios from "axios";
+import http from "../servicios/servicioHttp";
 
-const apiEndpoint = "http://localhost:3001/eventos-interesantes";
+const urlPedidoEventos = "http://localhost:3001/eventos-interesantes";
 
 export default class EventosInteresantes extends Component {
   state = {
@@ -12,7 +10,7 @@ export default class EventosInteresantes extends Component {
   };
 
   async componentDidMount() {
-    const { data: eventos } = await axios.get(apiEndpoint);
+    const { data: eventos } = await http.get(urlPedidoEventos);
     this.setState({ eventos });
   }
 
