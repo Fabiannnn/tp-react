@@ -1,39 +1,32 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 
-export default class ResumenEvento extends Component {
-  evento = {
-    id: this.props.id,
-    nombre: this.props.nombre,
-    ubicacion: this.props.ubicacion,
-    fechaInicio: this.props.fechaInicio,
-    fechaFin: this.props.fechaFin,
-    precio: this.props.precio
-  };
-
+export class ResumenEvento extends Component {
   render() {
-    console.log("props", this.props);
     return (
-      <Link
-        to={{
-          pathname: `/evento/${this.evento.id}`,
-          state: this.evento
-        }}
-      >
-        <div>
-          {this.evento.nombre +
-            "   " +
-            this.evento.ubicacion +
-            "   " +
-            this.evento.fechaInicio +
-            "   " +
-            this.evento.fechaFin +
-            "   " +
-            this.evento.precio}
-        </div>
-      </Link>
+      <List style={{ backgroundColor: "lightgrey" }}>
+        <ListItem
+          button
+          component={Link}
+          to={{
+            pathname: `/detalleEvento/${this.props.evento.id}`,
+            state: this.props.evento
+          }}
+        >
+          <ListItemText
+            primary={this.props.evento.nombre}
+            secondary={this.props.evento.lugar}
+          />
+          <FontAwesomeIcon icon="clock" />
+          {this.props.evento.fechaInicio}
+        </ListItem>
+        <Divider />
+      </List>
     );
   }
 }
-
-//       <Link to={`/eventos/${this.evento.id}`} >

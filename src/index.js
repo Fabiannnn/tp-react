@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
+import 'typeface-roboto';
+
 
 ReactDOM.render(
   <BrowserRouter>

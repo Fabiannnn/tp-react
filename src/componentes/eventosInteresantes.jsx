@@ -1,54 +1,58 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import http from "../servicios/servicioHttp";
-import ResumenEvento from "../componentes/resumenEvento";
+import { ResumenEvento } from "../componentes/resumenEvento";
+import { EventoService } from "../servicios/EventoService";
+import { Evento } from "../domain/Evento";
+//import { Usuario } from "../domain/Usuario";
+//import { PruebaID } from "../servicios/Configuracion";
+import Paper from '@material-ui/core/Paper';
+import { UsuarioService } from "../servicios/UsuarioService";
 
-const urlPedidoEventos = "http://localhost:3001/eventos-interesantes";
-
-export default class EventosInteresantes extends Component {
-  state = {
-    eventos: []
-  };
-
-  async componentDidMount() {
-    const { data: eventos } = await http.get(urlPedidoEventos);
-    this.setState({ eventos });
-  }
-
-  acceder = evento => {
-    console.log(evento);
-  };
-
-  mostrarTablaEventos() {
-    return (
-      <table className="table">
-        <tbody>
-          {this.state.eventos.map(evento => (
-            <tr key={evento.id}>
-              <td>
-                <Link to={`/eventos/${evento.id}`}>
-                  {evento.nombre} {evento.ubicacion} {evento.fechaInicio}
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+export class EventosInteresantes extends Component {
+  constructor(props) {
+    super(props);
+    this.eventoService = new EventoService();
+    this.usuarioService = new UsuarioService();
+    this.state = {
+      //eventos: this.eventoService.getAllEventos(),
+      usuario: {},
+      eventos: []
+    };
   }
 
   render() {
     return (
-      <div>
+      <Paper>
         {this.state.eventos.map(evento => (
-          <ResumenEvento key={evento.id} {...evento} />
+          <ResumenEvento evento={evento} key={evento.id} />
         ))}
-      </div>
+      </Paper>
     );
   }
+  /*
+  async componentWillMount() {
+    try {
+        const res = await this.eventosService.getAllEventos(PruebaID)
+        const eventosJson = await res.json()
+        this.setState({
+            eventos: eventosJson.map((eventoJson) => Evento.fromJson(eventoJson))
+        })
+    } catch (e) {
+        this.errorHandler(e)
+    }
+  }
+  /* BACKEND */
+  async componentWillMount() {
+    try {
+      const user = await this.usuarioService.getUsuario(1)
+      const eventosint = await this.eventoService.getEventosInteresantes(1)
+      this.setState({
+        usuario: user,
+        eventos: eventosint.map((eventoJson) => Evento.fromJson(eventoJson))
+      })
+      console.log(this.state.usuario)
+      console.log(this.state.eventos)
+    } catch (e) {
+      this.errorHandler(e)
+    }
+  }
 }
-
-//<React.Fragment>
-//this.state.eventos.length === 0 && "No hay eventos"}
-//{this.mostrarTablaEventos()}
-//</React.Fragment>

@@ -4,11 +4,13 @@
 
 var http = require("http");
 
-var servidor = http.createServer(function(req, res) {
+var servidor = http.createServer(function (req, res) {
   console.log("el request fue: " + req.url);
-  res.writeHead(200, { "Content-Type": "application/json" });
-  var eventos = [
-    {
+  res.writeHead(200, {
+    "Content-Type": "application/json"
+  });
+
+  const eventos = [{
       id: 1,
       nombre: "Hosen Fest",
       ubicacion: "Club Ciudad",

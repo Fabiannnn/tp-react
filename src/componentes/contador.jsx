@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Contador extends Component {
+export class Contador extends Component {
   // el estado es una propiedad que almacena todos los datos que voy a usar
   estado = {
     contador: 0,
@@ -33,7 +33,7 @@ export default class Contador extends Component {
     // y lo reemplazo por this.obtenerClases() si abstraigo en un metodo
 
     return (
-      <React.Fragment>
+      <div>
         <span style={this.styles} className={this.obtenerClasesContador()}>
           {this.formatearContador()}
         </span>
@@ -45,7 +45,8 @@ export default class Contador extends Component {
           Increment
         </button>
         {this.mostrarLista()}
-      </React.Fragment>
+
+      </div>
     );
   }
 

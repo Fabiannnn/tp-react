@@ -1,29 +1,43 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, {
+  Component
+} from "react";
+import {
+  EventosRoutes
+} from "./Routes";
+import {
+  BrowserRouter
+} from "react-router-dom";
 
 import "./App.css";
-import NavBar from "./componentes/navbar";
-import Contador from "./componentes/contador";
-import DetalleEvento from "./componentes/detalleEvento";
-import EventosInteresantes from "./componentes/eventosInteresantes";
+import 'typeface-roboto';
+import {
+  library
+} from '@fortawesome/fontawesome-svg-core'
+import {
+  faStroopwafel,
+  faDollarSign,
+  faMapMarkerAlt,
+  faClock,
+  faUndo,
+  faCalendarCheck,
+  faTicketAlt,
+  faSearchLocation,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons'
+library.add(faStroopwafel, faDollarSign, faMapMarkerAlt, faClock, faUndo, faCalendarCheck, faTicketAlt, faSearchLocation, faUserCircle)
+//import NavBar from "./componentes/navbar";
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <NavBar />
-        <main className="container">
-          <Switch>
-            <Route path="/evento/:id" component={DetalleEvento} />
-            <Route path="/eventos" component={EventosInteresantes} />
-            <Route path="/contador" component={Contador} />
-            <Route
-              path="/eventos-interesantes"
-              component={EventosInteresantes}
-            />
-          </Switch>
+      <div>
+        { /* <NavBar /> */}
+        <main className="container" >
+          <BrowserRouter >
+            <EventosRoutes />
+          </BrowserRouter>
         </main>
-      </React.Fragment>
+      </div>
     );
   }
 }
